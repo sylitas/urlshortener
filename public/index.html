@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <title>URL Shortener</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="container">
+    <input id="input" class="input" type="text" placeholder="Don't wait, Just Paste! Result is ready"
+      onpaste="sendRequest(this)">
+    <div class="search"></div>
+  </div>
+  <p style="color: #252525;">
+    URL shortener
+    Link shortener
+    Custom short URLs
+    Shorten links
+    Link management
+    Track links
+    URL redirection
+    Click tracking
+    Customized URLs
+    URL branding
+    Analytics for links
+    Link metrics
+    Short URL service
+    URL optimization
+    Link sharing
+  </p>
+</body>
+
+<script>
+  function sendRequest(element) {
+    setTimeout(function () {
+      fetch(`${window.location.origin}/`, {
+        method: "POST",
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ url: element.value })
+      }).then((res) => res.json()).then(({ url }) => {
+        const input = document.getElementById("input");
+        input.value = url;
+        navigator.clipboard.writeText(url).then(function () {
+          alert('A new link just immediately jump into your clipboard');
+        }, console.error);
+      }, console.log)
+    }, 4);
+
+  }
+
+</script>
+
+</html>
